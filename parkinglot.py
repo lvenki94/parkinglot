@@ -9,8 +9,9 @@ class ParkingLot:
 
     def park_vehicle(self, vehicle):
         """
-        Parks a vehicle
-        :param vehicle:
+        Parks a vehicle if a slot is available.
+
+        :param vehicle: Type <Vehicle>.
         :return: Returns the parked slot no, if no slot was found returns 0. <int>
         """
         if self.available_slots:
@@ -66,7 +67,7 @@ class ParkingLot:
         Returns a vehicle with reg_no.
         
         :param reg_no: Registration No. of a parked vehicle.
-        :return: Type <Vehicle> if vehicle is parked else None type.
+        :return: Type <Vehicle> if vehicle is parked, else <None> type.
         """
 
         if reg_no in self.vehicle:
@@ -78,8 +79,8 @@ class ParkingLot:
         """
         Gets all Vehicles parked by owner of given age.
         
-        :param age:
-        :return:
+        :param age: Driver's Age
+        :return: Type set of <Vehicle> of vehicles driven by age.
         """
 
         if age in self.driver_age:

@@ -111,8 +111,7 @@ class Driver:
 
     def print_output(self):
         """
-        Prints the Output to the Terminal
-
+        Prints the Output to Terminal.
         :return: None
         """
         for output in self.output:
@@ -121,8 +120,7 @@ class Driver:
     def drive(self):
         """
         Program Driver
-
-        :return:
+        :return: None
         """
         self.set_input_commands()
         self.execute_commands()
