@@ -1,5 +1,6 @@
 Programming Language: Python 3.7
-Steps to Run  the Program
+
+**Steps to Run  the Program**
 
 - Create a virtual environment in the `venv` folder with  the command `virtualenv --python=python3.7 venv`
 - Activate the python virtual environment with `source venv/bin/activate`
