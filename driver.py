@@ -79,7 +79,7 @@ class Driver:
 
             elif command == SLOT_BY_CAR:
                 reg_no = split[1]
-                vehicle = self.parking_lot.get_slot_of_vehicle(reg_no)
+                vehicle = self.parking_lot.get_vehicle(reg_no)
                 if vehicle:
                     out = vehicle.slot
                 else:
@@ -89,7 +89,7 @@ class Driver:
 
             elif command == SLOTS_BY_AGE or command == REG_NO_BY_DRIVER_AGE:
                 age = split[1]
-                vehicles = self.parking_lot.get_vehicles_by_age(age)
+                vehicles = self.parking_lot.get_vehicles_by_driver_age(age)
                 out_list = []
                 if vehicles:
 
@@ -110,14 +110,20 @@ class Driver:
                 self.output.append("Invalid Command.")
 
     def print_output(self):
+        """
+        Prints the Output to the Terminal
+
+        :return: None
+        """
         for output in self.output:
             print(output)
 
-        # print(self.parking_lot.vehicle)
-        # print(self.parking_lot.age)
-        # print(self.parking_lot.slots)
-
     def drive(self):
+        """
+        Program Driver
+
+        :return:
+        """
         self.set_input_commands()
         self.execute_commands()
         self.print_output()

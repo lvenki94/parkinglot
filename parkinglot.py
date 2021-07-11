@@ -4,23 +4,23 @@ class ParkingLot:
         self.available_slots = slots
         self.nearest_available_slot = 1
         self.slots = dict()
-        self.age = dict()
+        self.driver_age = dict()
         self.vehicle = dict()
 
     def park_vehicle(self, vehicle):
         """
         Parks a vehicle
         :param vehicle:
-        :return:
+        :return: Returns the parked slot no, if no slot was found returns 0. <int>
         """
         if self.available_slots:
             parked_slot = self.nearest_available_slot
             vehicle.slot = parked_slot
             self.slots[parked_slot] = vehicle
-            if vehicle.age not in self.age:
-                self.age[vehicle.age] = {vehicle}
+            if vehicle.age not in self.driver_age:
+                self.driver_age[vehicle.age] = {vehicle}
             else:
-                self.age[vehicle.age].add(vehicle)
+                self.driver_age[vehicle.age].add(vehicle)
 
             if vehicle.reg_no not in self.vehicle:
                 self.vehicle[vehicle.reg_no] = vehicle
@@ -40,15 +40,16 @@ class ParkingLot:
     def vacate_slot(self, slot):
         """
         Vacates an occupied slot.
-        :param slot:
-        :return:
+        
+        :param slot: Slot Number to vacate.
+        :return: Type <Vehicle> or <Boolean> Returns the vacated vehicle.
         """
         if slot in self.slots:
             vehicle = self.slots[slot]
 
             del self.slots[slot]
             del self.vehicle[vehicle.reg_no]
-            self.age[vehicle.age].remove(vehicle)
+            self.driver_age[vehicle.age].remove(vehicle)
 
             self.available_slots += 1
             if self.nearest_available_slot:
@@ -60,11 +61,12 @@ class ParkingLot:
         else:
             return False
 
-    def get_slot_of_vehicle(self, reg_no):
+    def get_vehicle(self, reg_no):
         """
-        Gets the slot no. of Vehicle
-        :param reg_no:
-        :return:
+        Returns a vehicle with reg_no.
+        
+        :param reg_no: Registration No. of a parked vehicle.
+        :return: Type <Vehicle> if vehicle is parked else None type.
         """
 
         if reg_no in self.vehicle:
@@ -72,14 +74,15 @@ class ParkingLot:
         else:
             return None
 
-    def get_vehicles_by_age(self, age):
+    def get_vehicles_by_driver_age(self, age):
         """
         Gets all Vehicles parked by owner of given age.
+        
         :param age:
         :return:
         """
 
-        if age in self.age:
-            return self.age[age]
+        if age in self.driver_age:
+            return self.driver_age[age]
         else:
             return None
