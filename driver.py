@@ -47,7 +47,6 @@ class Driver:
                 slots = int(split[1])
                 self.parking_lot = ParkingLot(slots)
                 out = "Created parking of {} slots".format(slots)
-                self.output.append(out)
 
             elif command == PARK:
                 reg_no = split[1]
@@ -59,7 +58,6 @@ class Driver:
                         .format(reg_no, slot)
                 else:
                     out = "Parking Lot is Full."
-                self.output.append(out)
 
             elif command == VACATE:
                 slot = split[1]
@@ -75,8 +73,6 @@ class Driver:
                 else:
                     out = "Slot is Empty"
 
-                self.output.append(out)
-
             elif command == SLOT_BY_CAR:
                 reg_no = split[1]
                 vehicle = self.parking_lot.get_vehicle(reg_no)
@@ -84,8 +80,6 @@ class Driver:
                     out = vehicle.slot
                 else:
                     out = "No parked car matches the query"
-
-                self.output.append(out)
 
             elif command == SLOTS_BY_AGE or command == REG_NO_BY_DRIVER_AGE:
                 age = split[1]
@@ -104,10 +98,10 @@ class Driver:
                 else:
                     out = "No parked car matches the query"
 
-                self.output.append(out)
-
             else:
-                self.output.append("Invalid Command.")
+                out = "Invalid Command."
+
+            self.output.append(out)
 
     def print_output(self):
         """
