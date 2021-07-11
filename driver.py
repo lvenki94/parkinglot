@@ -4,7 +4,7 @@ from vehicle import Vehicle
 from constants import (
     CREATE,
     PARK,
-    SLOTS_BY_AGE,
+    SLOTS_BY_DRIVER_AGE,
     SLOT_BY_CAR,
     VACATE,
     REG_NO_BY_DRIVER_AGE
@@ -81,14 +81,14 @@ class Driver:
                 else:
                     out = "No parked car matches the query"
 
-            elif command == SLOTS_BY_AGE or command == REG_NO_BY_DRIVER_AGE:
+            elif command == SLOTS_BY_DRIVER_AGE or command == REG_NO_BY_DRIVER_AGE:
                 age = split[1]
                 vehicles = self.parking_lot.get_vehicles_by_driver_age(age)
                 out_list = []
                 if vehicles:
 
                     for vehicle in vehicles:
-                        if command == SLOTS_BY_AGE:
+                        if command == SLOTS_BY_DRIVER_AGE:
                             out_list.append(str(vehicle.slot))
                         else:
                             out_list.append(vehicle.reg_no)
