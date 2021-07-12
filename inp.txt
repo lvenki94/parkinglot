@@ -8,3 +8,6 @@ Slot_number_for_car_with_number KA-01-HH-1235
 Slot_number_for_car_with_number KA-01-HH-1236
 Slot_number_for_car_with_number KA-01-HH-1237
 Leave 6
+Leave 1
+Leave 1
+Park KA-01-HH-1235 driver_age 21

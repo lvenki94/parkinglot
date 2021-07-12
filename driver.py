@@ -7,8 +7,14 @@ from constants import (
     SLOTS_BY_DRIVER_AGE,
     SLOT_BY_CAR,
     VACATE,
-    REG_NO_BY_DRIVER_AGE
-)
+    REG_NO_BY_DRIVER_AGE,
+    OUT_CREATE,
+    OUT_PARK_SUCCESS,
+    OUT_PARK_FAIL,
+    OUT_LEAVE_SUCCESS,
+    OUT_LEAVE_FAIL1,
+    OUT_LEAVE_FAIL2,
+    OUT_QUERY_NO_RESULT, OUT_INVALID_COMMAND)
 
 log = logging.getLogger(__name__)
 
@@ -46,7 +52,7 @@ class Driver:
             if command == CREATE:
                 slots = int(split[1])
                 self.parking_lot = ParkingLot(slots)
-                out = "Created parking of {} slots".format(slots)
+                out = OUT_CREATE.format(slots)
 
             elif command == PARK:
                 reg_no = split[1]
@@ -54,27 +60,20 @@ class Driver:
                 vehicle = Vehicle(reg_no, age)
                 slot = self.parking_lot.park_vehicle(vehicle)
                 if slot:
-                    out = "Car with vehicle registration number \"{}\" has been parked at slot number {}"\
-                        .format(reg_no, slot)
+                    out = OUT_PARK_SUCCESS.format(reg_no, slot)
                 else:
-                    out = "Parking Lot is Full or car already parked."
+                    out = OUT_PARK_FAIL
 
             elif command == VACATE:
                 slot = split[1]
                 vehicle = self.parking_lot.vacate_slot(int(slot))
                 if vehicle:
-                    out = "Slot number {} vacated, the car with vehicle registration number" \
-                          " \"{}\" left the space, the driver of the car was of age {}"\
-                        .format(
-                        slot,
-                        vehicle.reg_no,
-                        vehicle.age
-                    )
+                    out = OUT_LEAVE_SUCCESS.format(slot, vehicle.reg_no, vehicle.age)
                 else:
                     if int(slot) <= self.parking_lot.max_available_slots:
-                        out = "Slot is Empty"
+                        out = OUT_LEAVE_FAIL1
                     else:
-                        out = "Slot Does not Exist"
+                        out = OUT_LEAVE_FAIL2
 
             elif command == SLOT_BY_CAR:
                 reg_no = split[1]
@@ -99,10 +98,10 @@ class Driver:
                 if out_list:
                     out = ",".join(out_list)
                 else:
-                    out = "No parked car matches the query"
+                    out = OUT_QUERY_NO_RESULT
 
             else:
-                out = "Invalid Command."
+                out = OUT_INVALID_COMMAND
 
             self.output.append(out)
 
