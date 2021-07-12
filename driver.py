@@ -81,7 +81,7 @@ class Driver:
                 if vehicle:
                     out = vehicle.slot
                 else:
-                    out = "No parked car matches the query"
+                    out = OUT_QUERY_NO_RESULT
 
             elif command == SLOTS_BY_DRIVER_AGE or command == REG_NO_BY_DRIVER_AGE:
                 age = split[1]
