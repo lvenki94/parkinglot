@@ -14,7 +14,7 @@ class ParkingLot:
         :param vehicle: Type <Vehicle>.
         :return: Returns the parked slot no, if no slot was found returns 0. <int>
         """
-        if self.available_slots:
+        if self.available_slots and vehicle.reg_no not in self.vehicle:
             parked_slot = self.nearest_available_slot
             vehicle.slot = parked_slot
             self.slots[parked_slot] = vehicle

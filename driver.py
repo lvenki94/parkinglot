@@ -57,7 +57,7 @@ class Driver:
                     out = "Car with vehicle registration number \"{}\" has been parked at slot number {}"\
                         .format(reg_no, slot)
                 else:
-                    out = "Parking Lot is Full."
+                    out = "Parking Lot is Full or car already parked."
 
             elif command == VACATE:
                 slot = split[1]
@@ -71,7 +71,10 @@ class Driver:
                         vehicle.age
                     )
                 else:
-                    out = "Slot is Empty"
+                    if int(slot) <= self.parking_lot.max_available_slots:
+                        out = "Slot is Empty"
+                    else:
+                        out = "Slot Does not Exist"
 
             elif command == SLOT_BY_CAR:
                 reg_no = split[1]
